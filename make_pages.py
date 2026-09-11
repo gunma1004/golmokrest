@@ -118,12 +118,91 @@ def generate_shop_cards(gu_name, dong_name):
 with open("template.html", "r", encoding="utf-8") as f:
     template_content = f.read()
 
-total_count = 0
+total_dong_count = 0
+total_gu_count = 0
+
 for city, gu_dict in regions_data.items():
     for gu_code, gu_info in gu_dict.items():
         gu_name = gu_info["name"]
         dongs = gu_info["dongs"]
         
+        # 1. 각 구(Gu) 허브 페이지 폴더 생성 및 index.html 작성 (여기에 하위 동 목록 버튼들이 들어감)
+        gu_dir = os.path.join("area", city, gu_code)
+        os.makedirs(gu_dir, exist_ok=True)
+        gu_file_path = os.path.join(gu_dir, "index.html")
+        
+        # 하위 동 버튼 목록 HTML 생성
+        dongs_html = ""
+        for dong in dongs:
+            dongs_html += f'<a href="/area/{city}/{gu_code}/{dong}/" style="background:#f8f9fa; border:1px solid #e3e8ee; padding:12px 15px; border-radius:8px; text-align:center; color:#333; text-decoration:none; font-weight:600; font-size:14px; transition:all 0.2s;">{dong}</a>\n'
+
+        gu_html_content = f"""<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>{gu_name} 하위 동 전체보기 | 골목리스트</title>
+<meta name="description" content="{gu_name} 전 지역 동별 스웨디시 및 홈케어 제휴 정보 안내">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+<style>
+* {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }}
+body {{ background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }}
+.kt-wrap {{ max-width: 1180px; margin: 0 auto; padding: 0 15px; }}
+.kt-utilbar {{ background: #1d2a27; color: #fff; font-size: 13px; padding: 8px 0; }}
+.kt-utilbar .kt-wrap {{ display: flex; justify-content: flex-end; gap: 15px; }}
+.kt-utilbar a {{ color: #fff; text-decoration: none; }}
+.kt-logorow {{ background: #fff; padding: 20px 0; border-bottom: 1px solid #e3e8ee; }}
+.kt-logorow .kt-wrap {{ display: flex; justify-content: space-between; align-items: center; }}
+.kt-logo {{ font-size: 24px; font-weight: 800; color: #c62828; text-decoration: none; }}
+.kt-menubar {{ background: #2c3e50; color: #fff; }}
+.kt-menubar .kt-wrap {{ display: flex; gap: 20px; padding: 12px 15px; }}
+.kt-menubar a {{ color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }}
+.content-wrap {{ max-width: 1180px; margin: 30px auto; padding: 0 15px; }}
+h1 {{ font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #1d2a27; border-left: 5px solid #c62828; padding-left: 12px; }}
+.region-section {{ background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }}
+.region-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }}
+.region-grid a:hover {{ background: #c62828; color: #fff; border-color: #c62828; }}
+.kt-foot {{ background: #1d2a27; color: #adb5bd; padding: 30px 0; font-size: 13px; margin-top: 50px; text-align: center; }}
+</style>
+</head>
+<body>
+<div class="kt-utilbar"><div class="kt-wrap">
+    <a href="/area/">지역 전체보기</a>
+    <a href="/partner/">제휴 문의</a>
+</div></div>
+
+<div class="kt-logorow"><div class="kt-wrap">
+    <a class="kt-logo" href="/">골목리스트</a>
+    <div><a href="/partner/" style="background:#c62828; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:700;">제휴 문의</a></div>
+</div></div>
+
+<div class="kt-menubar"><div class="kt-wrap">
+    <a href="/area/">지역 찾기</a>
+    <a href="/partner/">입점 문의</a>
+</div></div>
+
+<div class="content-wrap">
+    <nav style="font-size: 13px; color: #666; margin-bottom: 15px;"><a href="/" style="color:#666; text-decoration:none;">홈</a> › <a href="/area/" style="color:#666; text-decoration:none;">지역 전체보기</a> › <b>{gu_name}</b></nav>
+    <h1>{gu_name} 하위 동 선택</h1>
+    <div class="region-section">
+        <div class="region-grid">
+            {dongs_html}
+        </div>
+    </div>
+</div>
+
+<footer class="kt-foot">
+    <p>&copy; 2026 골목리스트 All Rights Reserved.</p>
+</footer>
+</body>
+</html>
+"""
+
+        with open(gu_file_path, "w", encoding="utf-8") as f:
+            f.write(gu_html_content)
+        total_gu_count += 1
+
+        # 2. 각 동별 상세 페이지 생성
         for dong_name in dongs:
             dong_dir = os.path.join("area", city, gu_code, dong_name)
             os.makedirs(dong_dir, exist_ok=True)
@@ -131,7 +210,6 @@ for city, gu_dict in regions_data.items():
             file_path = os.path.join(dong_dir, "index.html")
             shop_cards_html = generate_shop_cards(gu_name, dong_name)
             
-            # 문자열 치환
             content = template_content.replace("{GU_NAME}", gu_name)
             content = content.replace("{DONG_NAME}", dong_name)
             content = content.replace("{CITY}", city)
@@ -141,6 +219,6 @@ for city, gu_dict in regions_data.items():
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)
                 
-            total_count += 1
+            total_dong_count += 1
 
-print(f"총 {total_count}개의 시·구·동 상세 페이지 생성 완료!")
+print(f"총 {total_gu_count}개의 구(Gu) 목록 페이지 및 {total_dong_count}개의 동 상세 페이지 생성 완료!")
