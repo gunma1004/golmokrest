@@ -6,6 +6,11 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://golmokrest.netlify.app/area/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://golmokrest.netlify.app/area/gyeonggi/ansan-danwon/고잔동/</loc>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
