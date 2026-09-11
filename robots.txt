@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://golmokrest.netlify.app/sitemap.xml
