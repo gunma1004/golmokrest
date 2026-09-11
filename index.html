@@ -39,10 +39,10 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
 .kt-hero-chips a { background: rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; transition: background 0.2s; }
 .kt-hero-chips a:hover { background: #c62828; }
 .kt-sectitle { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; }
-.kt-shopgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.kt-shopgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-bottom: 20px; }
 .kt-shop { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 18px; text-decoration: none; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
 .kt-shop h4 { font-size: 16px; font-weight: 700; color: #1d2a27; margin-bottom: 6px; }
-.kt-shop p { font-size: 13px; color: #666; margin-bottom: 4px; }
+.kt-shop p { font-size: 13px; color: #46525f; margin-bottom: 10px; line-height: 1.4; }
 .kt-foot { background: #1d2a27; color: #adb5bd; padding: 40px 0; font-size: 13px; margin-top: 40px; }
 .kt-foot .kt-wrap { display: flex; flex-direction: column; gap: 15px; }
 .kt-foot-logo { color: #fff; font-size: 18px; font-weight: 800; text-decoration: none; margin-bottom: 5px; display: block; }
@@ -93,7 +93,7 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
 <main class="kt-main">
     <section class="kt-hero-main">
         <h1>서울 · 경기 · 인천 골목 리스트</h1>
-        <p>수도권 전 지역의 우수 매장과 제휴 홈케어 정보를 손쉽게 비교하고 찾아보세요.</p>
+        <p>수도권 전 지역의 우수 제휴 홈케어 및 스웨디시 정보를 손쉽게 비교하고 찾아보세요.</p>
         <div class="kt-hero-chips">
             <a href="/area/">전체 지역 보기</a>
             <a href="/area/seoul/">서울</a>
@@ -103,24 +103,9 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
     </section>
 
     <div>
-        <h2 class="kt-sectitle">골목리스트 추천 매장</h2>
-        <div class="kt-shopgrid">
-            <a class="kt-shop" href="/area/seoul/gangnam/역삼동/">
-                <h4>서울 강남구 역삼동 안내</h4>
-                <p>프리미엄 스웨디시 및 홈케어</p>
-                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
-            </a>
-            <a class="kt-shop" href="/area/gyeonggi/seongnam-bundang/정자동/">
-                <h4>경기 성남시 분당구 정자동 안내</h4>
-                <p>맞춤형 힐링 케어 서비스</p>
-                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
-            </a>
-            <a class="kt-shop" href="/area/incheon/namdong/구월동/">
-                <h4>인천 남동구 구월동 안내</h4>
-                <p>수도권 신속 방문 홈케어</p>
-                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
-            </a>
-        </div>
+        <h2 class="kt-sectitle">골목리스트 추천 제휴 샵</h2>
+        <!-- 자바스크립트로 랜덤 렌더링될 제휴 샵 그리드 영역 -->
+        <div class="kt-shopgrid" id="randomShopGrid"></div>
     </div>
 </main>
 </div></div>
@@ -128,9 +113,78 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
 <footer class="kt-foot"><div class="kt-wrap">
     <div>
         <a class="kt-foot-logo" href="https://golmokrest.netlify.app/">골목리스트</a>
-        <p>서울, 경기, 인천 수도권 지역의 다양한 매장과 생활 정보를 한곳에서 비교하고 찾을 수 있는 정보 플랫폼입니다.</p>
+        <p>서울, 경기, 인천 수도권 지역의 다양한 제휴 및 홈케어 정보를 한곳에서 비교하고 찾을 수 있는 정보 플랫폼입니다.</p>
     </div>
     <p class="kt-foot-copy">&copy; 2026 골목리스트 All Rights Reserved.</p>
 </div></footer>
+
+<script>
+// 5개 제휴 샵 데이터 배열
+const shops = [
+    {
+        name: "🔥 한국미인홈케어",
+        desc: "서울·경기·인천 전지역 신속 방문! 정성 가득한 테라피 & 릴렉싱 프로그램",
+        phone: "0507-1280-3303",
+        price: "100,000원부터~"
+    },
+    {
+        name: "✨ 오늘밤테라피",
+        desc: "품격 있는 힐링을 선사하는 최고급 오일 프라이빗 방문 테라피 서비스",
+        phone: "0507-1280-3223",
+        price: "60,000원부터~"
+    },
+    {
+        name: "💎 주주테라피",
+        desc: "재방문율 1위! 칼도착 25분 보장, 철저한 위생 관리와 럭셔리 케어",
+        phone: "0507-1280-3193",
+        price: "60,000원부터~"
+    },
+    {
+        name: "🌟 퀸즈홈테라피",
+        desc: "전문 힐러들의 맞춤형 VIP 피로회복 특화 프로그램 진행 중",
+        phone: "0507-1280-3334",
+        price: "60,000원부터~"
+    },
+    {
+        name: "👑 골든테라피",
+        desc: "선입금 없는 100% 후불제! 수도권 전지역 평균 25분 내 실시간 도착",
+        phone: "0507-1280-3360",
+        price: "110,000원부터~"
+    }
+];
+
+// 배열을 무작위로 섞는 함수 (Fisher-Yates Shuffle)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// 페이지 로드 시 샵 배열을 섞고 HTML 생성
+window.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('randomShopGrid');
+    if (!grid) return;
+
+    // 복사 후 셔플
+    const shuffledShops = shuffleArray([...shops]);
+
+    let html = '';
+    shuffledShops.forEach(s => {
+        html += `
+            <a class="kt-shop" href="tel:${s.phone}" rel="nofollow">
+                <h4>${s.name}</h4>
+                <p>${s.desc}</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; border-top:1px solid #f1f3f5; padding-top:8px;">
+                    <span style="color:#c62828; font-weight:bold;">요금: ${s.price}</span>
+                    <span style="background:#c62828; color:#fff; padding:5px 10px; border-radius:6px; font-weight:bold; font-size:12px;">📞 전화 연결</span>
+                </div>
+            </a>
+        `;
+    });
+    grid.innerHTML = html;
+});
+</script>
 </body>
 </html>
