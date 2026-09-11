@@ -97,13 +97,13 @@ shops = [
     {"name": "👑 골든테라피", "desc": "선입금 없는 100% 후불제! 수도권 전지역 평균 25분 내 실시간 도착", "phone": "0507-1280-3360", "price": "110,000원부터~"}
 ]
 
-def generate_shop_cards(gu_name, dong_name):
+def generate_shop_cards(gu_name, region_name):
     cards_html = ""
     for s in shops:
         cards_html += f"""
         <a class="kt-shop" href="tel:{s['phone']}" rel="nofollow" style="text-decoration:none; display:block; margin-bottom:12px;">
             <div style="background:#fff; border:1px solid #e3e8ee; border-radius:12px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
-                <h4 style="font-size:16px; font-weight:bold; color:#1d2a27; margin:0 0 6px 0;">{s['name']} ({gu_name} {dong_name} 맞춤 안내)</h4>
+                <h4 style="font-size:16px; font-weight:bold; color:#1d2a27; margin:0 0 6px 0;">{s['name']} ({gu_name} {region_name} 맞춤 안내)</h4>
                 <p style="font-size:13px; color:#46525f; margin:0 0 10px 0; line-height:1.4;">{s['desc']}</p>
                 <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; border-top:1px solid #f1f3f5; padding-top:8px;">
                     <span style="color:#c62828; font-weight:bold;">요금: {s['price']}</span>
@@ -126,23 +126,24 @@ for city, gu_dict in regions_data.items():
         gu_name = gu_info["name"]
         dongs = gu_info["dongs"]
         
-        # 1. 각 구(Gu) 허브 페이지 폴더 생성 및 index.html 작성 (여기에 하위 동 목록 버튼들이 들어감)
+        # 1. 구(Gu) 허브 페이지 생성 (동 목록 + 제휴샵 카드 포함)
         gu_dir = os.path.join("area", city, gu_code)
         os.makedirs(gu_dir, exist_ok=True)
         gu_file_path = os.path.join(gu_dir, "index.html")
         
-        # 하위 동 버튼 목록 HTML 생성
         dongs_html = ""
         for dong in dongs:
             dongs_html += f'<a href="/area/{city}/{gu_code}/{dong}/" style="background:#f8f9fa; border:1px solid #e3e8ee; padding:12px 15px; border-radius:8px; text-align:center; color:#333; text-decoration:none; font-weight:600; font-size:14px; transition:all 0.2s;">{dong}</a>\n'
+
+        gu_shop_cards_html = generate_shop_cards(gu_name, "전지역")
 
         gu_html_content = f"""<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>{gu_name} 하위 동 전체보기 | 골목리스트</title>
-<meta name="description" content="{gu_name} 전 지역 동별 스웨디시 및 홈케어 제휴 정보 안내">
+<title>{gu_name} 스웨디시 홈케어 제휴 정보 | 골목리스트</title>
+<meta name="description" content="{gu_name} 지역 동별 스웨디시 및 홈케어 제휴 업체 안내">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
 <style>
 * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }}
@@ -157,11 +158,12 @@ body {{ background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }}
 .kt-menubar {{ background: #2c3e50; color: #fff; }}
 .kt-menubar .kt-wrap {{ display: flex; gap: 20px; padding: 12px 15px; }}
 .kt-menubar a {{ color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }}
-.content-wrap {{ max-width: 1180px; margin: 30px auto; padding: 0 15px; }}
-h1 {{ font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #1d2a27; border-left: 5px solid #c62828; padding-left: 12px; }}
-.region-section {{ background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }}
-.region-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }}
+.content-wrap {{ max-width: 800px; margin: 20px auto; padding: 0 15px; }}
+h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; border-left: 5px solid #c62828; padding-left: 12px; }}
+.region-section {{ background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }}
+.region-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }}
 .region-grid a:hover {{ background: #c62828; color: #fff; border-color: #c62828; }}
+.kt-sectitle {{ font-size: 18px; font-weight: 800; margin: 25px 0 12px 0; border-bottom: 2px solid #c62828; padding-bottom: 6px; }}
 .kt-foot {{ background: #1d2a27; color: #adb5bd; padding: 30px 0; font-size: 13px; margin-top: 50px; text-align: center; }}
 </style>
 </head>
@@ -183,11 +185,18 @@ h1 {{ font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #1d2a27; bo
 
 <div class="content-wrap">
     <nav style="font-size: 13px; color: #666; margin-bottom: 15px;"><a href="/" style="color:#666; text-decoration:none;">홈</a> › <a href="/area/" style="color:#666; text-decoration:none;">지역 전체보기</a> › <b>{gu_name}</b></nav>
-    <h1>{gu_name} 하위 동 선택</h1>
+    <h1>{gu_name} 지역 안내 및 동 선택</h1>
+    
     <div class="region-section">
+        <h3 style="font-size:15px; margin-bottom:12px; font-weight:700;">📍 {gu_name} 하위 동 선택하기</h3>
         <div class="region-grid">
             {dongs_html}
         </div>
+    </div>
+
+    <h2 class="kt-sectitle"><span>{gu_name} 공식 제휴 샵</span></h2>
+    <div>
+        {gu_shop_cards_html}
     </div>
 </div>
 
@@ -221,4 +230,4 @@ h1 {{ font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #1d2a27; bo
                 
             total_dong_count += 1
 
-print(f"총 {total_gu_count}개의 구(Gu) 목록 페이지 및 {total_dong_count}개의 동 상세 페이지 생성 완료!")
+print(f"총 {total_gu_count}개의 구(Gu) 페이지(동 목록+제휴샵 포함) 및 {total_dong_count}개의 동 페이지 생성 완료!")
