@@ -23,26 +23,29 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
 .kt-menubar a { color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
 .kt-body { display: flex; gap: 20px; margin-top: 20px; padding-bottom: 40px; }
 .kt-aside { width: 260px; flex-shrink: 0; }
-.kt-widget { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 1px solid #e3e8ee; }
-.kt-widget h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; border-bottom: 2px solid #c62828; padding-bottom: 6px; }
+.kt-widget { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 1px solid #e3e8ee; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+.kt-widget h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; border-bottom: 2px solid #c62828; padding-bottom: 6px; color: #1d2a27; }
 .kt-linkgrid { display: flex; flex-wrap: wrap; gap: 6px; }
-.kt-linkgrid a { background: #f8f9fa; padding: 6px 12px; border-radius: 6px; font-size: 13px; color: #333; text-decoration: none; border: 1px solid #e3e8ee; }
+.kt-linkgrid a { background: #f8f9fa; padding: 8px 12px; border-radius: 6px; font-size: 13px; color: #333; text-decoration: none; border: 1px solid #e3e8ee; width: 100%; font-weight: 600; }
 .kt-linkgrid a:hover { background: #c62828; color: #fff; border-color: #c62828; }
+.kt-callban { display: block; background: #c62828; color: #fff; padding: 15px; border-radius: 12px; text-decoration: none; text-align: center; margin-top: 15px; }
+.kt-callban span { display: block; font-size: 12px; opacity: 0.9; }
+.kt-callban strong { font-size: 16px; font-weight: 800; }
 .kt-main { flex-grow: 1; min-width: 0; }
-.kt-hero-main { background: linear-gradient(135deg, #2c3e50, #1d2a27); color: #fff; padding: 40px 30px; border-radius: 16px; margin-bottom: 25px; }
+.kt-hero-main { background: linear-gradient(135deg, #2c3e50, #1d2a27); color: #fff; padding: 40px 30px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 .kt-hero-main h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; }
 .kt-hero-main p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
 .kt-hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.kt-hero-chips a { background: rgba(255,255,255,0.2); color: #fff; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; }
-.kt-sectitle { font-size: 20px; font-weight: 800; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-.kt-shopgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.kt-hero-chips a { background: rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 13px; font-weight: 600; transition: background 0.2s; }
+.kt-hero-chips a:hover { background: #c62828; }
+.kt-sectitle { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; }
+.kt-shopgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
 .kt-shop { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 18px; text-decoration: none; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
 .kt-shop h4 { font-size: 16px; font-weight: 700; color: #1d2a27; margin-bottom: 6px; }
 .kt-shop p { font-size: 13px; color: #666; margin-bottom: 4px; }
-.kt-morelink { color: #c62828; text-decoration: none; font-weight: 700; font-size: 14px; }
 .kt-foot { background: #1d2a27; color: #adb5bd; padding: 40px 0; font-size: 13px; margin-top: 40px; }
-.kt-foot .kt-wrap { display: flex; flex-direction: column; gap: 20px; }
-.kt-foot-logo { color: #fff; font-size: 18px; font-weight: 800; text-decoration: none; margin-bottom: 10px; display: block; }
+.kt-foot .kt-wrap { display: flex; flex-direction: column; gap: 15px; }
+.kt-foot-logo { color: #fff; font-size: 18px; font-weight: 800; text-decoration: none; margin-bottom: 5px; display: block; }
 .kt-foot-copy { color: #6c757d; font-size: 12px; border-top: 1px solid #2c3e50; padding-top: 15px; }
 </style>
 </head>
@@ -50,40 +53,49 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
 <div class="kt-utilbar"><div class="kt-wrap">
     <a href="/area/">지역 정보</a>
     <a href="/partner/">제휴 문의</a>
-    <a href="/bbs/login.php">로그인</a>
-    <a href="/bbs/register.php">회원가입</a>
+    <a href="https://golmokrest.netlify.app/bbs/login.php">로그인</a>
+    <a href="https://golmokrest.netlify.app/bbs/register.php">회원가입</a>
 </div></div>
 
 <div class="kt-logorow"><div class="kt-wrap">
     <a class="kt-logo" href="https://golmokrest.netlify.app/">골목리스트<em>수도권 골목 구석구석 알뜰 정보</em></a>
-    <div><a href="/partner/" style="background:#c62828; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:700;">제휴 · 입점 문의</a></div>
+    <div><a href="/partner/" style="background:#c62828; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:700; font-size:14px;">제휴 · 입점 문의</a></div>
 </div></div>
 
 <div class="kt-menubar"><div class="kt-wrap">
-    <a href="/area/">지역 찾기</a>
+    <a href="/area/">지역 찾기 (전체보기)</a>
     <a href="/house/">추천 매장</a>
     <a href="/story/">골목 매거진</a>
-    <a href="/notice/">공지사항</a>
     <a href="/partner/">입점 문의</a>
 </div></div>
 
 <div class="kt-wrap"><div class="kt-body">
+<!-- 좌측 사이드바 -->
 <aside class="kt-aside">
     <div class="kt-widget">
-        <h3>수도권 지역별</h3>
-        <div class="kt-linkgrid">
-            <a href="/area/seoul/">서울</a>
-            <a href="/area/gyeonggi/">경기</a>
-            <a href="/area/incheon/">인천</a>
+        <h3>수도권 지역별 안내</h3>
+        <div class="kt-wbody">
+            <div class="kt-linkgrid">
+                <a href="/area/" style="background:#c62828; color:#fff; border-color:#c62828; text-align:center;">📍 전체 지역 보기 (시·구·동)</a>
+                <a href="/area/seoul/">서울 특별시 (25개 구)</a>
+                <a href="/area/gyeonggi/">경기도 (시·군·구)</a>
+                <a href="/area/incheon/">인천광역시 (구·군)</a>
+            </div>
         </div>
     </div>
+    <a class="kt-callban" href="/partner/">
+        <span>제휴·입점 문의</span>
+        <strong>온라인 접수하기</strong>
+    </a>
 </aside>
 
+<!-- 본문 -->
 <main class="kt-main">
     <section class="kt-hero-main">
         <h1>서울 · 경기 · 인천 골목 리스트</h1>
-        <p>수도권 지역별 우수 매장과 생활 정보를 손쉽게 비교하고 찾아보세요.</p>
+        <p>수도권 전 지역의 우수 매장과 제휴 홈케어 정보를 손쉽게 비교하고 찾아보세요.</p>
         <div class="kt-hero-chips">
+            <a href="/area/">전체 지역 보기</a>
             <a href="/area/seoul/">서울</a>
             <a href="/area/gyeonggi/">경기</a>
             <a href="/area/incheon/">인천</a>
@@ -91,22 +103,22 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; }
     </section>
 
     <div>
-        <h2 class="kt-sectitle"><span>골목리스트 추천 매장</span></h2>
+        <h2 class="kt-sectitle">골목리스트 추천 매장</h2>
         <div class="kt-shopgrid">
-            <a class="kt-shop" href="/house/seoul-gangnam-sample1/">
-                <h4>서울 강남구 역삼동 샘플 스토어</h4>
-                <p>서울특별시 강남구 테헤란로</p>
-                <p style="color:#c62828; font-weight:600;">평일 10:00 ~ 20:00</p>
+            <a class="kt-shop" href="/area/seoul/gangnam/역삼동/">
+                <h4>서울 강남구 역삼동 안내</h4>
+                <p>프리미엄 스웨디시 및 홈케어</p>
+                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
             </a>
-            <a class="kt-shop" href="/house/gyeonggi-bundang-sample2/">
-                <h4>경기 성남시 분당구 뷰티샵</h4>
-                <p>경기도 성남시 분당구 황새울로</p>
-                <p style="color:#c62828; font-weight:600;">매일 09:00 ~ 21:00</p>
+            <a class="kt-shop" href="/area/gyeonggi/seongnam-bundang/정자동/">
+                <h4>경기 성남시 분당구 정자동 안내</h4>
+                <p>맞춤형 힐링 케어 서비스</p>
+                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
             </a>
-            <a class="kt-shop" href="/house/incheon-namdong-sample3/">
-                <h4>인천 남동구 구월동 라이프 스토어</h4>
-                <p>인천광역시 남동구 인하로</p>
-                <p style="color:#c62828; font-weight:600;">연중무휴 24시간</p>
+            <a class="kt-shop" href="/area/incheon/namdong/구월동/">
+                <h4>인천 남동구 구월동 안내</h4>
+                <p>수도권 신속 방문 홈케어</p>
+                <p style="color:#c62828; font-weight:600;">24시간 예약 가능</p>
             </a>
         </div>
     </div>
