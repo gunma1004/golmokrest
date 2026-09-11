@@ -2,50 +2,63 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>연수구 선학동 스웨디시 마사지 홈케어 | 골목리스트</title>
 <meta name="description" content="연수구 선학동 지역 스웨디시, 출장마사지 및 홈케어 제휴 업체 안내. 매일 24시간 운영 예약 상담.">
 <link rel="canonical" href="https://golmokrest.netlify.app/area/incheon/yeonsu/선학동/">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
-body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; padding-bottom: 70px; }
-.kt-wrap { max-width: 1180px; margin: 0 auto; padding: 0 15px; }
-.kt-utilbar { background: #1d2a27; color: #fff; font-size: 13px; padding: 8px 0; }
-.kt-utilbar .kt-wrap { display: flex; justify-content: flex-end; gap: 15px; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; -webkit-text-size-adjust: 100%; }
+body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; padding-bottom: 90px; overflow-x: hidden; }
+.kt-wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 15px; }
+
+/* 상단 유틸 및 로고바 모바일 대응 */
+.kt-utilbar { background: #1d2a27; color: #fff; font-size: 12px; padding: 6px 0; }
+.kt-utilbar .kt-wrap { display: flex; justify-content: flex-end; gap: 12px; }
 .kt-utilbar a { color: #fff; text-decoration: none; }
-.kt-logorow { background: #fff; padding: 20px 0; border-bottom: 1px solid #e3e8ee; }
+
+.kt-logorow { background: #fff; padding: 12px 0; border-bottom: 1px solid #e3e8ee; }
 .kt-logorow .kt-wrap { display: flex; justify-content: space-between; align-items: center; }
-.kt-logo { font-size: 24px; font-weight: 800; color: #c62828; text-decoration: none; }
-.kt-menubar { background: #2c3e50; color: #fff; }
-.kt-menubar .kt-wrap { display: flex; gap: 20px; padding: 12px 15px; }
-.kt-menubar a { color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
-.kt-wrap-body { max-width: 800px; margin: 20px auto; padding: 0 15px; }
-.kt-crumb { font-size: 13px; color: #666; margin-bottom: 15px; }
+.kt-logo { font-size: 20px; font-weight: 800; color: #c62828; text-decoration: none; }
+
+.kt-menubar { background: #2c3e50; color: #fff; overflow-x: auto; white-space: nowrap; }
+.kt-menubar .kt-wrap { display: flex; gap: 15px; padding: 10px 15px; }
+.kt-menubar a { color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+
+/* 본문 영역 모바일 맞춤 축소 */
+.kt-wrap-body { width: 100%; max-width: 800px; margin: 15px auto; padding: 0 12px; }
+.kt-crumb { font-size: 12px; color: #666; margin-bottom: 12px; word-break: break-all; }
 .kt-crumb a { color: #666; text-decoration: none; }
-.kt-hero { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 25px; margin-bottom: 20px; }
-.kt-hero h1 { font-size: 22px; font-weight: 800; margin-top: 5px; color: #1d2a27; }
-.kt-sectitle { font-size: 18px; font-weight: 800; margin: 25px 0 12px 0; border-bottom: 2px solid #c62828; padding-bottom: 6px; }
-.kt-infobox { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 20px; font-size: 14px; color: #46525f; line-height: 1.6; }
-/* 하단 바 수정 (번호 제거 및 제휴 안내형으로 변경) */
+
+.kt-hero { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 18px; margin-bottom: 15px; }
+.kt-hero h1 { font-size: 18px; font-weight: 800; margin-top: 4px; color: #1d2a27; word-break: keep-all; }
+
+.kt-sectitle { font-size: 16px; font-weight: 800; margin: 20px 0 10px 0; border-bottom: 2px solid #c62828; padding-bottom: 5px; }
+.kt-infobox { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 15px; font-size: 13px; color: #46525f; line-height: 1.6; word-break: keep-all; }
+
+/* 제휴샵 카드 모바일 1열 정렬 및 깨짐 방지 */
+.kt-shopgrid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.kt-shop { background: #fff; border: 1px solid #e3e8ee; border-radius: 12px; padding: 15px; text-decoration: none; display: block; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+.kt-shop h4 { font-size: 15px; font-weight: 700; color: #1d2a27; margin-bottom: 4px; }
+.kt-shop p { font-size: 13px; color: #666; margin-bottom: 8px; line-height: 1.4; word-break: keep-all; }
+
+/* 하단 고정 바 모바일 최적화 */
 .oc-wrap { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; background: #fff; border-top: 1px solid #e3e8ee; box-shadow: 0 -4px 12px rgba(0,0,0,0.08); }
-.oc-note { margin: 0; padding: 8px 14px; text-align: center; font-size: 13px; background: #c62828; color: #ffe082; font-weight: 600; }
-.oc-bar-in { display: flex; align-items: center; justify-content: space-between; max-width: 800px; margin: 0 auto; padding: 10px 15px; }
-.oc-bar-name { font-weight: 800; font-size: 14px; }
-.oc-btn { background: #c62828; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; }
+.oc-note { margin: 0; padding: 6px 10px; text-align: center; font-size: 11px; background: #c62828; color: #ffe082; font-weight: 600; word-break: keep-all; }
+.oc-bar-in { display: flex; align-items: center; justify-content: space-between; max-width: 800px; margin: 0 auto; padding: 8px 12px; gap: 10px; }
+.oc-bar-name { font-weight: 800; font-size: 12px; color: #1d2a27; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oc-btn { background: #c62828; color: #fff; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 12px; flex-shrink: 0; }
 </style>
 </head>
 <body>
 <div class="kt-utilbar"><div class="kt-wrap">
     <a href="/area/">지역 정보</a>
     <a href="/partner/">제휴 문의</a>
-    <a href="https://golmokrest.netlify.app/bbs/login.php">로그인</a>
-    <a href="https://golmokrest.netlify.app/bbs/register.php">회원가입</a>
 </div></div>
 
 <div class="kt-logorow"><div class="kt-wrap">
     <a class="kt-logo" href="https://golmokrest.netlify.app/">골목리스트</a>
-    <div><a href="/partner/" style="background:#c62828; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-size:13px; font-weight:700;">제휴 문의</a></div>
+    <div><a href="/partner/" style="background:#c62828; color:#fff; padding:6px 10px; border-radius:6px; text-decoration:none; font-size:12px; font-weight:700;">제휴 문의</a></div>
 </div></div>
 
 <div class="kt-menubar"><div class="kt-wrap">
@@ -59,12 +72,12 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; padding-bott
   <nav class="kt-crumb"><a href="https://golmokrest.netlify.app/">홈</a> › <a href="#">연수구</a> › <b>선학동</b></nav>
   
   <div class="kt-hero">
-    <div style="font-size: 13px; color: #c62828; font-weight: 700;">연수구 선학동</div>
+    <div style="font-size: 12px; color: #c62828; font-weight: 700;">연수구 선학동</div>
     <h1>연수구 선학동 스웨디시 · 홈케어 추천 제휴 샵</h1>
   </div>
   
   <h2 class="kt-sectitle"><span>연수구 선학동 추천 제휴 샵</span></h2>
-  <div>
+  <div class="kt-shopgrid">
     
         <a class="kt-shop" href="tel:0507-1280-3303" rel="nofollow" style="text-decoration:none; display:block; margin-bottom:12px;">
             <div style="background:#fff; border:1px solid #e3e8ee; border-radius:12px; padding:16px; box-shadow:0 2px 8px rgba(0,0,0,0.03);">
@@ -125,15 +138,14 @@ body { background-color: #f4f6f8; color: #1d2a27; line-height: 1.5; padding-bott
 
   <h2 class="kt-sectitle"><span>업체 소개</span></h2>
   <div class="kt-infobox">
-    <p>연수구 선학동 지역에서 이용하실 수 있는 프리미엄 스웨디시 및 홈케어 안내 페이지입니다. 상단에 안내된 5개 공식 제휴 샵의 개별 번호를 통해 24시간 프라이빗 힐링을 만나보세요.</p>
+    <p>연수구 선학동 지역에서 이용하실 수 있는 프리미엄 스웨디시 및 출장 마사지 안내 페이지입니다. 상단에 안내된 5개 공식 제휴 샵의 개별 번호를 통해 24시간 프라이빗 힐링을 만나보세요.</p>
   </div>
 </div>
 
-<!-- 전화번호를 제거하고 제휴 문의로 유도하는 하단 바 -->
 <div class="oc-wrap">
   <p class="oc-note">상단 <b>공식 제휴 샵 5곳</b>의 개별 번호를 통해 안전하게 이용하세요.</p>
   <div class="oc-bar-in">
-    <div class="oc-bar-name">연수구 선학동 스웨디시 홈케어 안내</div>
+    <div class="oc-bar-name">연수구 선학동 제휴 안내</div>
     <a class="oc-btn" href="/partner/">제휴·입점 문의</a>
   </div>
 </div>
