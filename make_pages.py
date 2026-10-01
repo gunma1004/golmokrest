@@ -3,8 +3,6 @@ import re
 import itertools
 
 # --- 🌟 100가지 고유 타이틀 & 메타 디스크립션 순환 패턴 풀 ---
-# 규칙 1: 타이틀 내 '마사지' 키워드 중복 배제 및 다채로운 테라피 종목 분산
-# 규칙 2: 메타 디스크립션에 {GU_NAME} {DONG_NAME} 바로 뒤에 '출장 마사지'가 자연스럽게 연결
 SEO_VARIATIONS = [
     ("{GU_NAME} {DONG_NAME} 출장 건식 마사지 & 힐링 케어 | 골목리스트", "{GU_NAME} {DONG_NAME} 출장 마사지 및 프리미엄 홈케어 전문. 검증된 관리사의 100% 후불제 안심 케어."),
     ("{GU_NAME} {DONG_NAME} 출장 스웨디시 & 프리미엄 테라피 | 골목리스트", "{GU_NAME} {DONG_NAME} 출장 마사지 전문 플랫폼. 선입금 전혀 없는 현장 결제로 편안하게 즐기는 테라피."),
@@ -107,7 +105,6 @@ SEO_VARIATIONS = [
     ("{GU_NAME} {DONG_NAME} 출장 힐링 모먼트 테라피 코스 | 골목리스트", "{GU_NAME} {DONG_NAME} 출장 마사지 감성 전신 케어. 은은한 향과 따뜻한 손길로 전하는 감동의 휴식."),
     ("{GU_NAME} {DONG_NAME} 출장 퍼펙트 전신 마사지 안내 | 골목리스트", "{GU_NAME} {DONG_NAME} 출장 마사지 프리미엄 힐링 서비스. 100% 후불제로 부담 없이 예약해 보세요.")
 ]
-
 seo_cycle = itertools.cycle(SEO_VARIATIONS)
 
 regions_data = {
@@ -207,6 +204,47 @@ shops = [
     {"name": "👑 골든테라피", "desc": "선입금 없는 100% 후불제! 수도권 전지역 평균 25분 내 실시간 도착", "phone": "0507-1280-3360", "price": "110,000원부터~"}
 ]
 
+# 🌟 네이버 SEO 유사문서 회피용: 지역별 고유 본문 및 FAQ 생성기 추가
+def get_unique_content(region_name):
+    # 지역명 글자들의 아스키코드 합을 이용해 항상 일정한 텍스트 매칭
+    char_sum = sum(ord(c) for c in region_name)
+    
+    bodies = [
+        f"{region_name} 권역을 중심으로 빠르고 안전하게 이용할 수 있는 프리미엄 테라피 안내입니다. 바쁜 일상과 업무 스트레스로 뭉친 근육을 전문 테라피스트의 섬세한 손길로 풀어보세요. 선입금 요구가 없는 100% 현장 결제 시스템으로 내상 없이 쾌적한 힐링을 보장합니다.",
+        f"조용하고 프라이빗한 휴식이 필요한 분들을 위해 {region_name} 전 지역 30분 내 방문 시스템을 갖췄습니다. 철저한 위생 관리와 검증된 관리사들의 체계적인 코스를 통해 {region_name} 거주 고객님들의 지친 심신을 완벽하게 리프레시 해드립니다.",
+        f"대표 상권이자 주거 밀집 지역인 {region_name} 맞춤형 힐링 바디케어 서비스입니다. 멀리 샵까지 직접 이동할 필요 없이, 머무시는 자택이나 오피스텔, 숙박업소 등 어디서든 전화를 통해 간편하게 예약하고 품격 있는 케어를 경험하실 수 있습니다."
+    ]
+    
+    faqs = [
+        [
+            {"q": f"{region_name} 지역은 몇 분 안에 도착하나요?", "a": f"교통 상황에 따라 다를 수 있으나, {region_name} 내 주요 지역은 배차 완료 후 평균 30분 이내에 신속하게 방문하는 것을 원칙으로 하고 있습니다."},
+            {"q": "결제는 언제 어떻게 하나요?", "a": "최근 빈번한 예약금 사기를 방지하기 위해 관리사가 도착한 후 직접 결제(현금, 계좌이체 등)하는 100% 후불제로만 운영됩니다."}
+        ],
+        [
+            {"q": f"{region_name} 주변 모텔이나 호텔에서도 이용 가능한가요?", "a": f"네, {region_name} 인근의 자택은 물론 오피스텔, 호텔, 모텔 등 고객님이 머무시는 모든 프라이빗한 공간에서 자유롭게 이용하실 수 있습니다."},
+            {"q": "원하는 관리사 스타일을 요청할 수 있나요?", "a": "예약 상담 시 선호하시는 압의 세기(강한 타이, 부드러운 스웨디시 등)를 말씀해 주시면 가장 적합한 테라피스트를 매칭해 드립니다."}
+        ]
+    ]
+    
+    selected_body = bodies[char_sum % len(bodies)]
+    selected_faq = faqs[char_sum % len(faqs)]
+    
+    faq_html = f"""
+    <div style="background:#fff; border:1px solid #e3e8ee; border-radius:12px; padding:20px; margin-bottom:25px; box-shadow:0 2px 8px rgba(0,0,0,0.02);">
+        <h3 style="font-size:16px; margin-bottom:15px; color:#c62828; font-weight:800;">💡 {region_name} 자주 묻는 질문</h3>
+        <div style="margin-bottom:12px; padding:12px; background:#f8f9fa; border-radius:8px;">
+            <p style="font-weight:700; color:#1d2a27; font-size:14px; margin-bottom:4px;">Q. {selected_faq[0]['q']}</p>
+            <p style="font-size:13px; color:#46525f; line-height:1.4;">A. {selected_faq[0]['a']}</p>
+        </div>
+        <div style="padding:12px; background:#f8f9fa; border-radius:8px;">
+            <p style="font-weight:700; color:#1d2a27; font-size:14px; margin-bottom:4px;">Q. {selected_faq[1]['q']}</p>
+            <p style="font-size:13px; color:#46525f; line-height:1.4;">A. {selected_faq[1]['a']}</p>
+        </div>
+    </div>
+    """
+    
+    return selected_body, faq_html
+
 def generate_shop_cards(gu_name, region_name):
     cards_html = ""
     for s in shops:
@@ -247,9 +285,11 @@ for city, gu_dict in regions_data.items():
 
         gu_shop_cards_html = generate_shop_cards(gu_name, "전지역")
 
-        # 구 단위 타이틀 & 디스크립션 정돈 (키워드 연속 중복 배제)
         gu_title = f"{gu_name} 출장 스웨디시 & 프리미엄 테라피 | 골목리스트"
         gu_desc = f"{gu_name} 전지역 구·동 출장 마사지 케어 및 프리미엄 홈타이 전문 안내. 검증된 관리사의 100% 후불제 안심 케어."
+
+        # 🌟 구 단위 고유 텍스트 & FAQ 렌더링
+        gu_body_text, gu_faq_html = get_unique_content(gu_name)
 
         gu_html_content = f"""<!doctype html>
 <html lang="ko">
@@ -261,14 +301,12 @@ for city, gu_dict in regions_data.items():
 <meta name="description" content="{gu_desc}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://golmokrest.netlify.app/area/{city}/{gu_code}/">
-
 <meta property="og:site_name" content="골목리스트">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{gu_title}">
 <meta property="og:description" content="{gu_desc}">
 <meta property="og:url" content="https://golmokrest.netlify.app/area/{city}/{gu_code}/">
-
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
 <style>
 * {{ box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }}
@@ -290,6 +328,8 @@ h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; bo
 .region-grid a:hover {{ background: #c62828; color: #fff; border-color: #c62828; }}
 .kt-sectitle {{ font-size: 18px; font-weight: 800; margin: 25px 0 12px 0; border-bottom: 2px solid #c62828; padding-bottom: 6px; }}
 .kt-foot {{ background: #1d2a27; color: #adb5bd; padding: 30px 0; font-size: 13px; margin-top: 50px; text-align: center; }}
+/* 본문 서술형 텍스트 스타일 */
+.unique-desc {{ font-size: 14px; color: #46525f; line-height: 1.6; margin-bottom: 20px; word-break: keep-all; text-align: justify; }}
 </style>
 </head>
 <body>
@@ -311,6 +351,10 @@ h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; bo
 <div class="content-wrap">
     <nav style="font-size: 13px; color: #666; margin-bottom: 15px;"><a href="/" style="color:#666; text-decoration:none;">홈</a> › <a href="/area/" style="color:#666; text-decoration:none;">지역 전체보기</a> › <b>{gu_name}</b></nav>
     <h1>{gu_name} 홈바디·출장마사지 동별 안내</h1>
+    
+    <!-- 🌟 SEO 치트키: 구 단위 고유 텍스트 및 FAQ 삽입 -->
+    <p class="unique-desc">{gu_body_text}</p>
+    {gu_faq_html}
     
     <div class="region-section">
         <h3 style="font-size:15px; margin-bottom:12px; font-weight:700;">📍 {gu_name} 하위 동 선택하기</h3>
@@ -336,7 +380,7 @@ h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; bo
             f.write(gu_html_content)
         total_gu_count += 1
 
-        # 2. 각 동별 상세 페이지 생성 (100개 패턴 순환 적용)
+        # 2. 각 동별 상세 페이지 생성
         for dong_name in dongs:
             dong_dir = os.path.join("area", city, gu_code, dong_name)
             os.makedirs(dong_dir, exist_ok=True)
@@ -344,14 +388,15 @@ h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; bo
             file_path = os.path.join(dong_dir, "index.html")
             shop_cards_html = generate_shop_cards(gu_name, dong_name)
             
-            # 100가지 패턴 중 다음 타이틀/디스크립션 세트 순환 선택
             title_tpl, desc_tpl = next(seo_cycle)
             page_title = title_tpl.format(GU_NAME=gu_name, DONG_NAME=dong_name)
             page_desc = desc_tpl.format(GU_NAME=gu_name, DONG_NAME=dong_name)
 
-            # 안전장치: 혹시라도 연속해서 나오는 '마사지'를 정규식으로 1개로 압축
             page_title = re.sub(r'(마사지\s*)+마사지', '마사지', page_title)
             page_desc = re.sub(r'(마사지\s*)+마사지', '마사지', page_desc)
+
+            # 🌟 동 단위 고유 텍스트 및 FAQ 생성
+            dong_body_text, dong_faq_html = get_unique_content(dong_name)
 
             content = template_content.replace("{PAGE_TITLE}", page_title)
             content = content.replace("{PAGE_DESC}", page_desc)
@@ -360,6 +405,10 @@ h1 {{ font-size: 22px; font-weight: 800; margin-bottom: 15px; color: #1d2a27; bo
             content = content.replace("{CITY}", city)
             content = content.replace("{GU_CODE}", gu_code)
             content = content.replace("{SHOP_CARDS}", shop_cards_html)
+            
+            # 🌟 template.html에 적용될 텍스트 치환
+            content = content.replace("{UNIQUE_INTRO}", f"<p style='font-size:14px; color:#46525f; line-height:1.6; margin-bottom:20px; word-break:keep-all; text-align:justify;'>{dong_body_text}</p>")
+            content = content.replace("{UNIQUE_FAQ}", dong_faq_html)
             
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)
